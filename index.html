@@ -48,10 +48,10 @@
     h3 { font-size: 1.25rem; line-height: 1.2; margin-bottom: 10px; }
     .hero p.lead { max-width: 590px; color: white; font-size: 1.05rem; margin-bottom: 28px; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .school-photo { position: relative; aspect-ratio: 4 / 3; margin: 0; border: 7px solid #fff; border-bottom: 9px solid #b64b66; box-shadow: 14px 14px 0 rgba(255,255,255,.14); overflow: hidden; background: #30262a; animation: enter-up .65s .12s both; }
-    .school-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-    .school-photo::after { content: ""; position: absolute; inset: 54% 0 0; background: linear-gradient(transparent,rgba(20,12,17,.84)); pointer-events: none; }
-    .school-photo figcaption { position: absolute; z-index: 1; left: 25px; bottom: 23px; right: 25px; color: white; font: 900 1.9rem/1 Arial, sans-serif; text-transform: uppercase; }
+    .hero-photo { position: relative; aspect-ratio: 4 / 3; margin: 0; border: 7px solid #fff; border-bottom: 9px solid #b64b66; box-shadow: 14px 14px 0 rgba(255,255,255,.14); overflow: hidden; background: #30262a; animation: enter-up .65s .12s both; }
+    .hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-photo::after { content: ""; position: absolute; inset: 70% 0 0; background: linear-gradient(transparent,rgba(20,12,17,.84)); pointer-events: none; }
+    .hero-photo figcaption { position: absolute; z-index: 1; left: 25px; bottom: 23px; right: 25px; color: white; font: 900 1.9rem/1 Arial, sans-serif; text-transform: uppercase; }
     @keyframes enter-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
     .scorebar { color: white; background: #23262c; border-bottom: 5px solid var(--blue); }
     .scorebar-inner { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1.2fr; }
@@ -60,18 +60,23 @@
     .score-cell:last-child { border-right: 0; }
     .score-cell small { display: block; margin-bottom: 4px; color: white; font-size: .83rem; font-weight: 650; letter-spacing: 0; }
     .score-cell strong { display: block; font: 900 clamp(1.2rem,2.2vw,1.8rem)/1.04 Arial, sans-serif; text-transform: uppercase; letter-spacing: .025em; }
-    section { padding-block: 82px; }
+    .score-cell a { text-decoration-thickness: 2px; text-underline-offset: 5px; }
+    .nowrap { white-space: nowrap; }
+    section { padding-block: 44px; }
     section:not(.support) > .container { border-top: 5px solid var(--ink); padding-top: 25px; }
     .goal-wrap { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(260px,.8fr); gap: 20px; }
     .panel { padding: clamp(24px,3.4vw,38px); border: 1px solid var(--line); border-top: 6px solid var(--blue); background: var(--white); }
     .goal-amount { font: 900 clamp(4rem,7vw,6rem)/.95 Arial, sans-serif; letter-spacing: .01em; color: var(--blue); margin-bottom: 12px; }
     .muted { color: var(--muted); }
     .progress-label { display: flex; justify-content: space-between; gap: 14px; margin: 28px 0 9px; font-size: .85rem; font-weight: 750; }
-    .progress { height: 15px; border: 1px solid #c3aab1; background: repeating-linear-gradient(90deg,#e7d4d9 0,#e7d4d9 25px,#fff 25px,#fff 28px); }
+    .progress-wrap { container-type: inline-size; }
+    .progress-live { display: block; width: calc(100% + 32px); height: 60px; margin: 0 -16px; border: 0; }
+    @container (min-width: 568px) { .progress-live { width: calc(100% + 48px); margin: 0 -24px; } }
     .placeholder { color: var(--ink); font-weight: 600; }
     .campaign-plan { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
     .campaign-plan h3 { margin-bottom: 6px; font: 900 1.55rem/1 Arial, sans-serif; text-transform: uppercase; }
     .campaign-plan p { max-width: 42ch; color: var(--muted); margin-bottom: 0; font-size: .88rem; }
+    .campaign-plan .button { margin-top: 16px; }
     .goal-wrap > .panel:first-child { display: flex; flex-direction: column; }
     .goal-wrap > .panel:first-child .campaign-plan { margin-top: auto; }
     .panel-callout { display: flex; flex-direction: column; gap: 16px; background: #fff; border-color: var(--line); border-top-color: var(--ink); }
@@ -93,6 +98,8 @@
     .needs-table tfoot { color: white; font-weight: 900; }
     .needs-table tfoot th { border-bottom: 0; padding-top: 13px; }
     .facts { background: #f1f2f3; }
+    .team-banner { margin: 0 0 17px; }
+    .team-banner img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 58%; background: #292b30; border-bottom: 5px solid var(--blue); }
     .fact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 17px; }
     .fact { padding: 24px; background: white; border: 1px solid var(--line); }
     .fact strong { display: block; margin-bottom: 10px; color: var(--ink); font: 700 clamp(2rem,3vw,2.5rem)/1.1 Arial, sans-serif; }
@@ -103,25 +110,30 @@
     .program-strip p { margin: 0; color: var(--ink); font-size: .95rem; }
     .updates { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
     .update-card { display: flex; flex-direction: column; padding: 24px 24px 0; border: 1px solid var(--line); background: white; }
+    .update-photo { display: block; width: calc(100% + 48px); max-width: none; height: auto; margin: -24px -24px 22px; aspect-ratio: 3 / 2; object-fit: cover; object-position: center; background: #292b30; border-bottom: 5px solid var(--blue); }
+    .update-photo-top { object-position: center 15%; }
     .update-card h3 { font: 700 clamp(1.25rem,2vw,1.5rem)/1.25 Arial, sans-serif; }
     .update-card p { color: var(--muted); }
-    .support { border-top: 9px solid var(--blue); background: #191b20; color: white; }
+    .support { padding-block: 60px; border-top: 9px solid var(--blue); background: #191b20; color: white; }
     .support .muted { color: #ead5dd; }
     .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
     .support .button { background: white; color: var(--blue-dark); border-color: white; }
     .support .button:hover { background: #fbeaf0; }
+    .support .button-outline { background: transparent; color: white; border-color: rgba(255,255,255,.7); }
+    .support .button-outline:hover { background: #fff; color: var(--ink); border-color: #fff; }
     .contact-panel { padding: 28px; border: 1px solid #60636b; border-top: 6px solid #b64b66; }
     .contact-panel a { color: #ffe2ec; overflow-wrap: anywhere; }
     .resource-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px 20px; margin: 15px 0 24px; padding: 0; list-style: none; }
     .resource-list li { padding: 9px 0; border-bottom: 1px solid #60636b; color: #f4d7df; font-size: .85rem; }
     .story-details { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin-top: auto; padding-top: 18px; }
-    .story-details .placeholder { display: inline-flex; align-items: flex-end; min-height: 43px; padding: 15px 12px 7px; border-radius: 50% 50% 0 0 / 60% 60% 0 0; background: var(--blue); color: white; font-size: .78rem; font-weight: 700; line-height: 1.15; white-space: nowrap; }
+    .story-details > * { display: inline-flex; align-items: flex-end; min-height: 43px; padding: 15px 12px 7px; border-radius: 50% 50% 0 0 / 60% 60% 0 0; background: var(--blue); color: white; font-size: .78rem; font-weight: 700; line-height: 1.15; white-space: nowrap; text-decoration: none; }
+    .story-details a:hover { background: var(--blue-dark); }
     footer { padding: 32px 0; color: white; background: #111317; font-size: .82rem; }
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    @media (max-width: 580px) { .panel-callout ul { grid-template-columns: 1fr; } }
-    @media (max-width: 800px) { .hero-grid,.goal-wrap,.support-grid,.needs-board { grid-template-columns: 1fr; } .hero { padding-block: 56px; } .school-photo { height: min(68vw,480px); aspect-ratio: auto; } .fact-grid { grid-template-columns: 1fr; } .updates { grid-template-columns: 1fr; } .scorebar-inner { grid-template-columns: repeat(2,1fr); } .score-cell:nth-child(2) { border-right: 0; } .score-cell:first-child { padding-left: 24px; } .score-cell:nth-child(-n+2) { border-bottom: 1px solid #4d5056; } }
-    @media (max-width: 580px) { .container { width: min(100% - 30px,1220px); } .brand-mark { width: 50px; height: 50px; font-size: 2rem; } .brand { font-size: 1.1rem; } .nav-bar .container { width: 100%; } nav { display: grid; grid-template-columns: repeat(2,1fr); } nav a { justify-content: center; padding: 11px 8px; border-bottom: 1px solid rgba(255,255,255,.24); font-size: .7rem; } nav a:first-child { border-left: 0; } .hero { padding-block: 45px; } h1 { font-size: clamp(3.25rem,15vw,5rem); } section { padding-block: 58px; } .score-cell { padding: 14px; } .score-cell:first-child { padding-left: 14px; } .score-cell strong { font-size: 1.25rem; } .score-cell small { font-size: .78rem; } .program-strip { grid-template-columns: 1fr; } .resource-list { grid-template-columns: 1fr; } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-copy,.school-photo { animation: none; } }
+    @media (max-width: 580px) { .panel-callout ul { grid-template-columns: 1fr; } .team-banner img { aspect-ratio: 3 / 2; } .hero-photo figcaption { left: 16px; right: 16px; bottom: 13px; font-size: 1.25rem; } }
+    @media (max-width: 800px) { .hero-grid,.goal-wrap,.support-grid,.needs-board { grid-template-columns: 1fr; } .hero { padding-block: 56px; } .hero-photo { height: min(68vw,480px); aspect-ratio: auto; } .fact-grid { grid-template-columns: 1fr; } .updates { grid-template-columns: 1fr; } .scorebar-inner { grid-template-columns: repeat(2,1fr); } .score-cell:nth-child(2) { border-right: 0; } .score-cell:first-child { padding-left: 24px; } .score-cell:nth-child(-n+2) { border-bottom: 1px solid #4d5056; } }
+    @media (max-width: 580px) { .container { width: min(100% - 30px,1220px); } .brand-mark { width: 50px; height: 50px; font-size: 2rem; } .brand { font-size: 1.1rem; } .nav-bar .container { width: 100%; } nav { display: grid; grid-template-columns: repeat(2,1fr); } nav a { justify-content: center; padding: 11px 8px; border-bottom: 1px solid rgba(255,255,255,.24); font-size: .7rem; } nav a:first-child { border-left: 0; } .hero { padding-block: 45px; } h1 { font-size: clamp(3.25rem,15vw,5rem); } section { padding-block: 34px; } .support { padding-block: 44px; } .score-cell { padding: 14px; } .score-cell:first-child { padding-left: 14px; } .score-cell strong { font-size: 1.25rem; } .score-cell small { font-size: .78rem; } .program-strip { grid-template-columns: 1fr; } .resource-list { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-copy,.hero-photo { animation: none; } }
   </style>
 </head>
 <body>
@@ -156,31 +168,31 @@
             <a class="button button-outline" href="#support">Ways to help</a>
           </div>
         </div>
-        <figure class="school-photo">
-          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Champaign_Central_High_School.jpg/960px-Champaign_Central_High_School.jpg" alt="Exterior of Champaign Central High School" loading="eager">
-          <figcaption>Home of the Maroons</figcaption>
+        <figure class="hero-photo">
+          <img src="images/team-group.jpg" width="1800" height="1200" alt="Champaign Central girls track and field athletes gathered for a team photo on the infield" loading="eager">
+          <figcaption>Meet the Maroons</figcaption>
         </figure>
       </div>
     </div>
     <div class="scorebar" aria-label="Campaign at a glance">
       <div class="container scorebar-inner">
-        <div class="score-cell"><small>Featured goal</small><strong>Hurdle carts</strong></div>
-        <div class="score-cell"><small>Target</small><strong>$1,500</strong></div>
-        <div class="score-cell"><small>Raised</small><strong>[Amount raised]</strong></div>
+        <div class="score-cell"><small>Featured goal</small><strong>New <span class="nowrap">warm-ups</span></strong></div>
+        <div class="score-cell"><small>Target</small><strong>$6,000</strong></div>
+        <div class="score-cell"><small>Raised</small><strong><a href="#goal">Live total ↓</a></strong></div>
         <div class="score-cell"><small>Next meet</small><strong>[Meet date]</strong></div>
       </div>
     </div>
 
     <section id="goal" aria-labelledby="goal-heading">
       <div class="container">
-        <h2 id="goal-heading">Fund the hurdle carts</h2>
+        <h2 id="goal-heading">Fund the new warm-ups</h2>
         <div class="goal-wrap">
           <div class="panel">
-            <div class="goal-amount">$1,500</div>
-            <p class="muted">Estimated cost of hurdle carts.</p>
-            <div class="progress-label"><span>Fundraising progress</span><span>[Amount raised] / $1,500</span></div>
-            <div class="progress" role="img" aria-label="Fundraising progress to be added when the amount raised is known"></div>
-            <div class="campaign-plan"><h3>Support this goal</h3><p>Help put the next equipment priority within reach.</p><p><span class="placeholder">[Donation link]</span></p></div>
+            <div class="goal-amount">$6,000</div>
+            <p class="muted">Estimated cost of new warm-up apparel.</p>
+            <div class="progress-label"><span>Fundraising progress</span><span>Updated live</span></div>
+            <div class="progress-wrap"><iframe class="progress-live" title="Live fundraising total" src="https://www.zeffy.com/en-US/embed/thermometer/support-champaign-central-girls-track-boosters"></iframe></div>
+            <div class="campaign-plan"><h3>Support this goal</h3><p>Help put new warm-ups within reach for the team.</p><a class="button" href="https://www.zeffy.com/en-US/donation-form/support-champaign-central-girls-track-boosters" target="_blank" rel="noopener">Donate now</a></div>
           </div>
           <div class="panel panel-callout">
             <figure class="athlete-photo">
@@ -201,7 +213,7 @@
         <div class="needs-board">
           <div class="needs-intro">
             <h3>What the team needs</h3>
-            <p>Hurdle carts are one part of a larger equipment wish list. The team also needs warm-up apparel, seating, and pit equipment.</p>
+            <p>New warm-ups are one part of a larger equipment wish list. The team also needs hurdle carts, seating, and pit equipment.</p>
           </div>
           <div class="needs-table-wrap">
             <table class="needs-table">
@@ -224,6 +236,9 @@
     <section class="facts" id="about" aria-labelledby="about-heading">
       <div class="container">
         <h2 id="about-heading">An open team with real needs</h2>
+        <figure class="team-banner">
+          <img src="images/team-full.jpg" width="1800" height="1200" alt="The full Champaign Central girls track and field team posing together on the turf" loading="lazy">
+        </figure>
         <div class="fact-grid">
           <div class="fact"><strong>44.4%</strong><p>of team members are classified as low-income students.</p></div>
           <div class="fact"><strong>$0</strong><p>is charged to a student athlete to participate; there are no tryouts.</p></div>
@@ -241,8 +256,8 @@
       <div class="container">
         <h2 id="updates-heading">Around the team</h2>
         <div class="updates">
-          <article class="update-card"><h3>Home meets take a team beyond the track.</h3><p>Central's home meets rely on family and community volunteers. The track is off campus, and every meet takes people working together.</p><div class="story-details"><span class="placeholder">[Next home meet date]</span><span class="placeholder">[Meet location]</span><span class="placeholder">[Volunteer sign-up link]</span></div></article>
-          <article class="update-card"><h3>Stay close to the team.</h3><p>Meet press releases, school announcements, and social updates keep supporters connected to the athletes and the season.</p><div class="story-details"><span class="placeholder">[Instagram link]</span><span class="placeholder">[Facebook link]</span><span class="placeholder">[X link]</span></div></article>
+          <article class="update-card"><img class="update-photo" src="images/relay-meet-day.jpg" width="1317" height="878" alt="Four Central relay teammates holding a baton together on a sunny meet day" loading="lazy"><h3>Home meets take a team beyond the track.</h3><p>Central's home meets rely on family and community volunteers. The track is off campus, and every meet takes people working together.</p><div class="story-details"><span class="placeholder">[Next home meet date]</span><span>McKinley Field</span><a href="https://www.runningmaroons.com/pages/?page=548" target="_blank" rel="noopener">Volunteer sign-ups</a></div></article>
+          <article class="update-card"><img class="update-photo update-photo-top" src="images/relay-baton.jpg" width="1200" height="1800" alt="Four Central relay teammates smiling with their hands together on a gold baton" loading="lazy"><h3>Stay close to the team.</h3><p>Meet press releases, school announcements, and social updates keep supporters connected to the athletes and the season.</p><div class="story-details"><a href="https://www.instagram.com/runningmaroons/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/runningmaroons/" target="_blank" rel="noopener">Facebook</a><a href="https://x.com/runningmaroons" target="_blank" rel="noopener">X (Twitter)</a></div></article>
         </div>
       </div>
     </section>
@@ -251,17 +266,22 @@
       <div class="container support-grid">
         <div>
           <h2 id="support-heading">Support can take more than one form.</h2>
-          <a class="button" href="mailto:Centralgirlstrackboosters@gmail.com?subject=Question%20about%20supporting%20Central%20Girls%20Track">Ask the Booster Club</a>
+          <div class="actions">
+            <a class="button" href="https://www.zeffy.com/en-US/donation-form/support-champaign-central-girls-track-boosters" target="_blank" rel="noopener">Donate</a>
+            <a class="button button-outline" href="https://www.zeffy.com/en-US/ticketing/central-girls-track-boosters-memberships" target="_blank" rel="noopener">Become a member</a>
+            <a class="button button-outline" href="https://www.zeffy.com/en-US/ticketing/central-girls-track-boosterss-silent-auction" target="_blank" rel="noopener">Silent auction</a>
+            <a class="button button-outline" href="mailto:Centralgirlstrackboosters@gmail.com?subject=Question%20about%20supporting%20Central%20Girls%20Track">Ask the Booster Club</a>
+          </div>
         </div>
         <div class="contact-panel">
           <h3>Connect with the team</h3>
           <ul class="resource-list">
-            <li>[Donation link]</li>
-            <li>[Meet schedule link]</li>
-            <li>[Volunteer sign-up link]</li>
-            <li>[Instagram link]</li>
-            <li>[Facebook link]</li>
-            <li>[X link]</li>
+            <li><a href="https://www.zeffy.com/en-US/donation-form/support-champaign-central-girls-track-boosters" target="_blank" rel="noopener">Donate online</a></li>
+            <li><a href="https://www.athletic.net/team/19700/track-and-field-outdoor" target="_blank" rel="noopener">Meet schedule and results</a></li>
+            <li><a href="https://www.runningmaroons.com/pages/?page=548" target="_blank" rel="noopener">Volunteer sign-ups</a></li>
+            <li><a href="https://www.instagram.com/runningmaroons/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/runningmaroons/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://x.com/runningmaroons" target="_blank" rel="noopener">X (Twitter)</a></li>
           </ul>
           <p>Booster Club contact:<br><a href="mailto:Centralgirlstrackboosters@gmail.com">Centralgirlstrackboosters@gmail.com</a></p>
         </div>
@@ -272,8 +292,8 @@
   <footer>
     <div class="container footer-inner"><span>Central Girls Track Boosters</span><span>Source: Booster Club Fact Sheet · September 2026</span></div>
     <div class="container" style="margin-top:14px; font-size:.73rem; line-height:1.5">
-      Photos: <a href="https://commons.wikimedia.org/wiki/File:Champaign_Central_High_School.jpg">Champaign Central High School by Kaveh k</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> (cropped for layout);
-      <a href="https://champaignchronicle.com/3538/opinion/what-to-look-out-for-on-champaign-centrals-track-team/">Reese Baumann photographed by Adam Edwards for the Champaign Central Chronicle</a> (2025).
+      Photos: <a href="https://champaignchronicle.com/3538/opinion/what-to-look-out-for-on-champaign-centrals-track-team/">Reese Baumann photographed by Adam Edwards for the Champaign Central Chronicle</a> (2025);
+      team photos: [Photo credit].
     </div>
   </footer>
 </body>
